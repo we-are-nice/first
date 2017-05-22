@@ -52,3 +52,4 @@ group :development do
 end
 
 gem 'responders'
+gem "react_on_rails", "~> 7"
