@@ -26,15 +26,15 @@ describe Api::V1::ContactsController do
 
   describe "#import" do
     let(:csv_import_service) { instance_double("CsvImportService")}
-    let(:file) { 'data.csv'}
+    let(:file) { fixture_file_upload("files/data.csv") }
 
     before do
       allow(CsvImportService).to receive(:new).with(no_args).and_return(csv_import_service)
     end
 
     it "responds with http status 201" do
-      expect(csv_import_service).to receive(:import).with(file)
-      post :import, { file: file }
+      expect(csv_import_service).to receive(:import).with(file.original_filename)
+      post :import, { name: file }
     end
   end
 
@@ -44,9 +44,9 @@ describe Api::V1::ContactsController do
       expect(Contact.count).to eq 1
     end
 
-    it "responds with http status 204" do
+    it "responds with http status 302" do
       delete :destroy, { id: 1 }
-      expect(response.status).to eq 204
+      expect(response.status).to eq 302
     end
   end
 
