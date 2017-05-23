@@ -5,7 +5,7 @@ export default class Body extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      contacts: []
+      contacts: [],
     };
   }
 
@@ -28,7 +28,6 @@ export default class Body extends React.Component {
     var newContacts = this.state.contacts.filter((contact) => {
       return contact.id != id;
     });
-
     this.setState({ contacts: newContacts });
   };
 
